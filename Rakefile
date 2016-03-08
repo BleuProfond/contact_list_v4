@@ -8,15 +8,26 @@ Rake::Task["db:drop"].clear
 # NOTE: Assumes SQLite3 DB
 desc "create the database"
 task "db:create" do
-  touch 'db/db.sqlite3'
+  touch 'db/contact_list_app.sqlite3'
 end
 
 desc "drop the database"
 task "db:drop" do
-  rm_f 'db/db.sqlite3'
+  rm_f 'db/contact_list_app.sqlite3'
 end
 
 desc 'Retrieves the current schema version number'
 task "db:version" do
   puts "Current version: #{ActiveRecord::Migrator.current_version}"
+end
+
+desc "reset the database"
+task "db:reset" do
+  rm_f 'db/contact_list_app.sqlite3'
+  touch 'db/contact_list_app.sqlite3'
+end
+
+desc 'Development console'
+task "console" do
+  pry
 end
